@@ -11,11 +11,20 @@ public interface WebhookProvider {
     @NotNull String getServiceName();
 
     /**
+     * Register the target webhook.
+     *
+     * @param webhook The webhook being registered.
+     */
+    void registerWebhook(@NotNull Webhook webhook);
+
+    /**
      * Register the given list of webhooks.
      *
      * @param webhooks The list of webhooks.
      */
-    void registerWebhooks(@NotNull List<Webhook> webhooks);
+    default void registerWebhooks(@NotNull List<Webhook> webhooks) {
+        webhooks.forEach(this::registerWebhook);
+    }
 
     /**
      * @return A list of loaded webhooks.

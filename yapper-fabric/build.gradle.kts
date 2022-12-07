@@ -8,6 +8,10 @@ version = project.extra["mod_version"] as String
 group = project.extra["maven_group"] as String
 
 dependencies {
+    // Core
+    implementation(project(":yapper-api"))
+    implementation(project(":yapper-core"))
+
     // Minecraft
     minecraft("com.mojang", "minecraft", project.extra["minecraft_version"] as String)
     mappings("net.fabricmc", "yarn", project.extra["yarn_mappings"] as String, null, "v2")
@@ -22,21 +26,8 @@ dependencies {
 }
 
 tasks {
-    val javaVersion = JavaVersion.toVersion((project.extra["java_version"] as String).toInt())
-    compileJava {
-        options.encoding = "UTF-8"
-        sourceCompatibility = javaVersion.toString()
-        targetCompatibility = javaVersion.toString()
-        options.release.set(javaVersion.toString().toInt())
-    }
-    jar { from("LICENSE") { rename { "${it}_${base.archivesName}" } } }
     processResources {
         filesMatching("fabric.mod.json") { expand(mutableMapOf("version" to project.extra["mod_version"] as String, "fabricloader" to project.extra["loader_version"] as String, "fabric_api" to project.extra["fabric_version"] as String, "fabric_language_kotlin" to project.extra["fabric_language_kotlin_version"] as String, "minecraft" to project.extra["minecraft_version"] as String, "java" to project.extra["java_version"] as String)) }
         filesMatching("*.mixins.json") { expand(mutableMapOf("java" to project.extra["java_version"] as String)) }
-    }
-    java {
-        sourceCompatibility = javaVersion
-        targetCompatibility = javaVersion
-        withSourcesJar()
     }
 }

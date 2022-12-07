@@ -10,7 +10,7 @@ abstract class BaseWebhookProvider : WebhookProvider {
         return this.webhooks
     }
 
-    override fun registerWebhooks(webhooks: MutableList<Webhook>) {
-        this.webhooks.addAll(webhooks)
+    override fun registerWebhook(webhook: Webhook) {
+        this.webhooks.add(webhook)
     }
 }

@@ -1,0 +1,8 @@
+# DO NOT EDIT! This allows Yapper to automatically migrate your configuration
+# between releases, and will break if you edit it.
+version = 1
+
+[[webhooks]]
+provider = "discord"
+endpoint = "https://example.com"
+disabled = true

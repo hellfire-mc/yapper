@@ -19,11 +19,8 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "YapperServer"
-    ],
-    "client": [
-      "dog.kaylen.yapper.fabric.client.YapperClient"
+    "server": [
+      "dog.kaylen.yapper.fabric.Yapper"
     ]
   },
   "mixins": [

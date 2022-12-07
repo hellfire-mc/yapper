@@ -5,10 +5,10 @@ import dog.kaylen.yapper.api.webhook.WebhookResult
 
 class TelegramWebhookProvider : BaseWebhookProvider() {
     override fun getServiceName(): String {
-        TODO("Not yet implemented")
+        return "Telegram"
     }
 
     override fun push(payload: MessagePayload): WebhookResult {
-        TODO("Not yet implemented")
+        return WebhookResult.ERROR
     }
 }

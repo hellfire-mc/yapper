@@ -6,6 +6,7 @@ plugins {
 dependencies {
     // Kyori Adventure
     implementation("net.kyori:adventure-api:4.12.0")
+    implementation("net.kyori:adventure-text-serializer-plain:4.12.0")
     // Lombok
     compileOnly("org.projectlombok:lombok:${project.extra["lombok_version"]}")
     annotationProcessor("org.projectlombok:lombok:${project.extra["lombok_version"]}")

@@ -5,12 +5,17 @@ plugins {
 }
 
 allprojects {
+    // configure repositories
     repositories {
         mavenCentral()
     }
 
+    // apply plugins
+    apply(plugin = "java")
     apply(plugin = "kotlin")
     apply(plugin = "com.diffplug.spotless")
+
+    // configure spotless
     spotless {
         ratchetFrom("origin/main")
 
@@ -38,5 +43,30 @@ allprojects {
 
     tasks.build.configure {
         dependsOn.add("spotlessApply")
+    }
+}
+
+subprojects {
+    val javaVersion = JavaVersion.toVersion((project.extra["java_version"] as String).toInt())
+
+    // configure java version
+    tasks {
+        java {
+            sourceCompatibility = javaVersion
+            targetCompatibility = javaVersion
+            withSourcesJar()
+        }
+        compileJava {
+            options.encoding = "UTF-8"
+            sourceCompatibility = javaVersion.toString()
+            targetCompatibility = javaVersion.toString()
+            options.release.set(javaVersion.toString().toInt())
+        }
+        compileKotlin {
+            kotlinOptions {
+                jvmTarget = javaVersion.toString()
+            }
+        }
+        jar { from("LICENSE") { rename { "${it}_${base.archivesName}" } } }
     }
 }
